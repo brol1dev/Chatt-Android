@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="custom_switch" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:thumb">@drawable/swith_thumb</item>
+        <item name="android:track">@drawable/switch_bg</item>
+    </style>
+
+</resources>
