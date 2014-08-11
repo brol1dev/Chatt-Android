@@ -3,9 +3,6 @@ package qcodemx.com.chatt;
 import java.util.ArrayList;
 import java.util.List;
 
-import qcodemx.com.chatt.ui.CTActivity;
-import qcodemx.com.chatt.ui.CTUIModule;
-
 /**
  * Created by Eric Vargas on 8/5/14.
  *

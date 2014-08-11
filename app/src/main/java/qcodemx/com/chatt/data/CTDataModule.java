@@ -1,6 +1,7 @@
 package qcodemx.com.chatt.data;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 
@@ -18,6 +19,8 @@ import dagger.Module;
 import dagger.Provides;
 import qcodemx.com.chatt.data.api.CTAPIModule;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Eric Vargas on 8/6/14.
  *
@@ -31,8 +34,14 @@ import qcodemx.com.chatt.data.api.CTAPIModule;
 public final class CTDataModule {
     private static final String LOG_TAG = "CTDataModule";
 
+    private static final String PREFS_FILE = "chatt_preferences";
+
     private static final String CACHE_FILE = "cache";
     private static final int DISK_CACHE_SIZE = 20 * 1024 * 1024;
+
+    @Provides @Singleton SharedPreferences provideSharedPreferences(Application application) {
+        return application.getSharedPreferences(PREFS_FILE, MODE_PRIVATE);
+    }
 
     @Provides @Singleton OkHttpClient provideOkHttpClient(Application application) {
         return createOkHttpClient(application);

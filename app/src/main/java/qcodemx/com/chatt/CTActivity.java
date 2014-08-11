@@ -1,11 +1,9 @@
-package qcodemx.com.chatt.ui;
+package qcodemx.com.chatt;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import dagger.ObjectGraph;
-import qcodemx.com.chatt.CTApplication;
-import qcodemx.com.chatt.Modules;
 
 /**
  * Created by Eric Vargas on 8/5/14.

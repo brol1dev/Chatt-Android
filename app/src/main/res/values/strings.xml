@@ -4,6 +4,9 @@
     <string name="app_name">Chatt</string>
     <string name="action_settings">Settings</string>
 
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
     <string name="or">or</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

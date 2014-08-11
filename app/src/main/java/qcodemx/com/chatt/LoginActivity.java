@@ -1,5 +1,6 @@
 package qcodemx.com.chatt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +11,10 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import qcodemx.com.chatt.data.PreferencesManager;
 import qcodemx.com.chatt.data.api.CTResponse;
 import qcodemx.com.chatt.data.api.UserService;
-import qcodemx.com.chatt.ui.CTActivity;
+import qcodemx.com.chatt.data.api.UserToken;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -29,12 +31,17 @@ public class LoginActivity extends CTActivity {
     @InjectView(R.id.edit_password) EditText passwordEditText;
 
     @Inject UserService userService;
+    @Inject PreferencesManager preferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+
+        if (null != preferencesManager.retrieveCurrentUser()) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
         registerButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,8 +61,42 @@ public class LoginActivity extends CTActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         CTResponse errorResponse = (CTResponse) error.getBody();
-                        Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
-                                .show();
+                        if (null != errorResponse.getMessage()) {
+                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Is there network connectivity?", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                });
+            }
+        });
+
+        loginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                userService.signIn(new UserCredentials(email, password), new Callback<UserToken>() {
+                    @Override
+                    public void success(UserToken userToken, Response response) {
+                        // TODO: store user in background
+                        preferencesManager.storeUser(userToken);
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        CTResponse errorResponse = (CTResponse) error.getBody();
+                        if (null != errorResponse.getMessage()) {
+                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Is there network connectivity?", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
                     }
                 });
             }

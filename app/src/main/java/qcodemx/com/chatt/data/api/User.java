@@ -7,9 +7,22 @@ package qcodemx.com.chatt.data.api;
  */
 public class User {
     protected String id;
+    protected String name;
     protected String email;
-    protected Long iat;     // issued at
-    protected Long exp;     // expiration
+    protected Long iat;              // issued at
+    protected Long exp;              // expiration
+
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User(String id, String name, String email, Long iat, Long exp) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.iat = iat;
+        this.exp = exp;
+    }
 
     public User(String id, String email, Long iat, Long exp) {
         this.id = id;
@@ -20,6 +33,10 @@ public class User {
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {

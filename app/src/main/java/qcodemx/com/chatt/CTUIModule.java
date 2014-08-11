@@ -1,10 +1,9 @@
-package qcodemx.com.chatt.ui;
+package qcodemx.com.chatt;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import qcodemx.com.chatt.LoginActivity;
 
 /**
  * Created by Eric Vargas on 8/5/14.
@@ -13,7 +12,9 @@ import qcodemx.com.chatt.LoginActivity;
  */
 @Module(
         injects = {
-                LoginActivity.class
+                LoginActivity.class,
+                MainActivity.class,
+                ChatListFragment.class
         },
         library = true,
         complete = false
