@@ -41,6 +41,7 @@ public class LoginActivity extends CTActivity {
 
         if (null != preferencesManager.retrieveCurrentUser()) {
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
         registerButton.setOnClickListener(new OnClickListener() {
@@ -76,6 +77,7 @@ public class LoginActivity extends CTActivity {
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
@@ -85,6 +87,7 @@ public class LoginActivity extends CTActivity {
                         // TODO: store user in background
                         preferencesManager.storeUser(userToken);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     }
 
                     @Override

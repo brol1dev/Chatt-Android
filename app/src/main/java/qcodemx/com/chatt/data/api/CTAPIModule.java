@@ -28,7 +28,7 @@ import static retrofit.RestAdapter.LogLevel.FULL;
         library = true
 )
 public final class CTAPIModule {
-    public static final String BASE_URL = "http://192.168.1.70:3000";
+    public static final String BASE_URL = "http://192.168.1.69:3000";
 
     @Provides @Singleton Endpoint provideEndpoint() {
         return Endpoints.newFixedEndpoint(BASE_URL);

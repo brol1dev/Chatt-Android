@@ -1,5 +1,6 @@
 package qcodemx.com.chatt;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -14,13 +15,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import qcodemx.com.chatt.data.PreferencesManager;
+import qcodemx.com.chatt.data.api.UserToken;
 import qcodemx.com.chatt.model.DrawerItemModel;
 import qcodemx.com.chatt.ui.LeftNavAdapter;
+import qcodemx.com.chatt.ui.old.AboutChat;
+import qcodemx.com.chatt.ui.old.ChatList;
+import qcodemx.com.chatt.ui.old.NoteList;
+import qcodemx.com.chatt.ui.old.ProjectList;
 
 /**
  * Created by Eric Vargas on 8/8/14.
@@ -40,11 +50,20 @@ public class MainActivity extends CTActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
+    @Inject PreferencesManager preferencesManager;
+    UserToken userToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        userToken = preferencesManager.retrieveCurrentUser();
+
+        setupActionBar();
+        setupContainer();
+        setupDrawer();
     }
 
     protected void setupActionBar()
@@ -103,6 +122,8 @@ public class MainActivity extends CTActivity {
 
         View header = getLayoutInflater().inflate(R.layout.left_nav_header,
                 null);
+        TextView emailTextView = (TextView) header.findViewById(R.id.text_mail);
+        emailTextView.setText(userToken.getUser().getEmail());
         drawerLeft.addHeaderView(header);
 
         drawerLeft.setAdapter(new LeftNavAdapter(this, getDummyLeftNavItems()));
@@ -152,28 +173,29 @@ public class MainActivity extends CTActivity {
         if (pos == CHAT_IDX)
         {
             title = "Chat";
-            f = new ChatListFragment();
+            f = new ChatList();
         }
-//        else if (pos == 2)
-//        {
-//            title = "Notes";
-//            f = new NoteList();
-//        }
-//        else if (pos == 3)
-//        {
-//            title = "Projects";
-//            f = new ProjectList();
-//        }
-//        else if (pos == 5)
-//        {
-//            title = "About Chatt";
-//            f = new AboutChat();
-//        }
-//        else if (pos == 6)
-//        {
-//            startActivity(new Intent(this, Login.class));
-//            finish();
-//        }
+        else if (pos == NOTES_IDX)
+        {
+            title = "Notes";
+            f = new NoteList();
+        }
+        else if (pos == PROJECTS_IDX)
+        {
+            title = "Projects";
+            f = new ProjectList();
+        }
+        else if (pos == ABOUT_IDX)
+        {
+            title = "About Chatt";
+            f = new AboutChat();
+        }
+        else if (pos == LOGOUT_IDX)
+        {
+            preferencesManager.clearUser();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
         if (f != null)
         {
             while (getSupportFragmentManager().getBackStackEntryCount() > 0)
