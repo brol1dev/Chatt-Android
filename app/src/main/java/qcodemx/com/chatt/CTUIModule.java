@@ -14,7 +14,8 @@ import dagger.Provides;
         injects = {
                 LoginActivity.class,
                 MainActivity.class,
-                ChatListFragment.class
+                EventListFragment.class,
+                NewEventActivity.class
         },
         library = true,
         complete = false

@@ -5,12 +5,12 @@ package qcodemx.com.chatt.model;
  *
  * Represents the data for an item in the navigation drawer.
  */
-public class DrawerItemModel {
+public class DrawerItem {
 
     private String title;
     private int imageResourceId;
 
-    public DrawerItemModel(String title, int imageResourceId) {
+    public DrawerItem(String title, int imageResourceId) {
         this.title = title;
         this.imageResourceId = imageResourceId;
     }

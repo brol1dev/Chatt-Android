@@ -1,4 +1,4 @@
-package qcodemx.com.chatt.ui;
+package qcodemx.com.chatt.ui.widget;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import qcodemx.com.chatt.R;
-import qcodemx.com.chatt.model.DrawerItemModel;
+import qcodemx.com.chatt.model.DrawerItem;
 
 /**
  * The Adapter class for the ListView displayed in the left navigation drawer.
@@ -20,7 +20,7 @@ public class LeftNavAdapter extends BaseAdapter
 {
 
 	/** The items. */
-	private ArrayList<DrawerItemModel> items;
+	private ArrayList<DrawerItem> items;
 
 	/** The context. */
 	private Context context;
@@ -33,7 +33,7 @@ public class LeftNavAdapter extends BaseAdapter
 	 * @param items
 	 *            the array of items to be displayed on ListView
 	 */
-	public LeftNavAdapter(Context context, ArrayList<DrawerItemModel> items)
+	public LeftNavAdapter(Context context, ArrayList<DrawerItem> items)
 	{
 		this.context = context;
 		this.items = items;
@@ -52,7 +52,7 @@ public class LeftNavAdapter extends BaseAdapter
 	 * @see android.widget.Adapter#getItem(int)
 	 */
 	@Override
-	public DrawerItemModel getItem(int position)
+	public DrawerItem getItem(int position)
 	{
 		return items.get(position);
 	}

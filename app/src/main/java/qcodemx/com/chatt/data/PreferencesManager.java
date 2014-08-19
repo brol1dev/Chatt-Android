@@ -15,6 +15,7 @@ import qcodemx.com.chatt.data.api.UserToken;
  */
 @Singleton
 public class PreferencesManager {
+    private static final String USER_ID = "user_id";
     private static final String USER_EMAIL = "email";
     private static final String USER_TOKEN = "token";
     private static final String REGISTRATION_ID = "reg_id";
@@ -30,21 +31,23 @@ public class PreferencesManager {
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString(USER_EMAIL, userToken.getUser().getEmail())
-                .putString(USER_TOKEN, userToken.getToken());
+                .putString(USER_TOKEN, userToken.getToken())
+                .putString(USER_ID, userToken.getUser().getId());
 //                .putString(REGISTRATION_ID, userToken.getRegistrationId());
 
         return editor.commit();
     }
 
     public UserToken retrieveCurrentUser() {
+        String userId = preferences.getString(USER_ID, "");
         String email = preferences.getString(USER_EMAIL, "");
         String token = preferences.getString(USER_TOKEN, "");
         String regId = preferences.getString(REGISTRATION_ID, "");
 
-        if (email.isEmpty() || token.isEmpty())
+        if (email.isEmpty() || token.isEmpty() || userId.isEmpty())
             return null;
 
-        User user = new User(email);
+        User user = new User(userId, email);
         return new UserToken(token, regId, user);
     }
 

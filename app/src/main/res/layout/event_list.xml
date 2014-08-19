@@ -12,7 +12,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/tab1"
+            android:id="@+id/btn_tab_private"
             style="@style/tab_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:background="@color/main_color_gray" />
 
         <Button
-            android:id="@+id/tab2"
+            android:id="@+id/btn_tab_public"
             style="@style/tab_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,19 +40,48 @@
     <RelativeLayout
         android:id="@+id/rel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_weight="1"
+        android:layout_height="0dp" >
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/list_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/main_color_gray_lt"
             android:dividerHeight="1dp"
-            tools:listitem="@layout/chat_item" >
+            tools:listitem="@layout/event_item" >
         </ListView>
 
         <LinearLayout
-            android:id="@+id/llQ"
+            android:id="@+id/empty_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_events"
+                android:textColor="@color/main_color_gray_dk"
+                android:textSize="@dimen/txt_20sp"
+                android:maxLines="2"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/pad_10dp"/>
+
+            <Button
+                android:id="@+id/btn_new_event"
+                style="@style/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_compose" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/new_event_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -60,11 +89,12 @@
             android:padding="@dimen/pad_20dp" >
 
             <Button
-                android:id="@+id/btnNewChat"
+                android:id="@id/btn_new_event"
                 style="@style/btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_compose" />
+
         </LinearLayout>
     </RelativeLayout>
 

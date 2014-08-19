@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,12 +26,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import qcodemx.com.chatt.data.PreferencesManager;
 import qcodemx.com.chatt.data.api.UserToken;
-import qcodemx.com.chatt.model.DrawerItemModel;
-import qcodemx.com.chatt.ui.LeftNavAdapter;
-import qcodemx.com.chatt.ui.old.AboutChat;
-import qcodemx.com.chatt.ui.old.ChatList;
-import qcodemx.com.chatt.ui.old.NoteList;
-import qcodemx.com.chatt.ui.old.ProjectList;
+import qcodemx.com.chatt.model.DrawerItem;
+import qcodemx.com.chatt.ui.widget.LeftNavAdapter;
 
 /**
  * Created by Eric Vargas on 8/8/14.
@@ -38,12 +35,10 @@ import qcodemx.com.chatt.ui.old.ProjectList;
  * Activity shown when a user is authenticated.
  */
 public class MainActivity extends CTActivity {
-    private static final int CHAT_IDX = 1;
-    private static final int NOTES_IDX = 2;
-    private static final int PROJECTS_IDX = 3;
-//    private static final int CHAT_IDX = 4;
-    private static final int ABOUT_IDX = 5;
-    private static final int LOGOUT_IDX = 6;
+    private static final String LOG_TAG = "MainActivity";
+
+    private static final int EVENTS_IDX = 1;
+    private static final int LOGOUT_IDX = 2;
 
     @InjectView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @InjectView(R.id.left_drawer) ListView drawerLeft;
@@ -60,6 +55,7 @@ public class MainActivity extends CTActivity {
         ButterKnife.inject(this);
 
         userToken = preferencesManager.retrieveCurrentUser();
+        Log.d(LOG_TAG, "current user: " + userToken);
 
         setupActionBar();
         setupContainer();
@@ -74,9 +70,9 @@ public class MainActivity extends CTActivity {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setLogo(R.drawable.icon);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(
-                R.drawable.actionbar_bg));
+//        actionBar.setLogo(R.drawable.icon);
+//        actionBar.setBackgroundDrawable(getResources().getDrawable(
+//                R.drawable.actionbar_bg));
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }
@@ -102,7 +98,7 @@ public class MainActivity extends CTActivity {
             @Override
             public void onDrawerOpened(View drawerView)
             {
-                getSupportActionBar().setTitle("Chatt");
+                getSupportActionBar().setTitle("My Out Life");
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
@@ -123,6 +119,7 @@ public class MainActivity extends CTActivity {
         View header = getLayoutInflater().inflate(R.layout.left_nav_header,
                 null);
         TextView emailTextView = (TextView) header.findViewById(R.id.text_mail);
+        Log.d(LOG_TAG, "email: " + userToken.getUser().getEmail());
         emailTextView.setText(userToken.getUser().getEmail());
         drawerLeft.addHeaderView(header);
 
@@ -147,15 +144,11 @@ public class MainActivity extends CTActivity {
      *
      * @return the dummy items
      */
-    private ArrayList<DrawerItemModel> getDummyLeftNavItems()
+    private ArrayList<DrawerItem> getDummyLeftNavItems()
     {
-        ArrayList<DrawerItemModel> al = new ArrayList<DrawerItemModel>();
-        al.add(new DrawerItemModel("Chat", R.drawable.ic_chat));
-        al.add(new DrawerItemModel("Notes", R.drawable.ic_notes));
-        al.add(new DrawerItemModel("Projects", R.drawable.ic_projects));
-        al.add(new DrawerItemModel("Settings", R.drawable.ic_setting));
-        al.add(new DrawerItemModel("About Chatt", R.drawable.ic_about));
-        al.add(new DrawerItemModel("Logout", R.drawable.ic_logout));
+        ArrayList<DrawerItem> al = new ArrayList<>();
+        al.add(new DrawerItem("Events", R.drawable.ic_projects));
+        al.add(new DrawerItem("Logout", R.drawable.ic_logout));
         return al;
     }
 
@@ -170,27 +163,10 @@ public class MainActivity extends CTActivity {
     {
         Fragment f = null;
         String title = null;
-        if (pos == CHAT_IDX)
-        {
-            title = "Chat";
-            f = new ChatList();
-        }
-        else if (pos == NOTES_IDX)
-        {
-            title = "Notes";
-            f = new NoteList();
-        }
-        else if (pos == PROJECTS_IDX)
-        {
-            title = "Projects";
-            f = new ProjectList();
-        }
-        else if (pos == ABOUT_IDX)
-        {
-            title = "About Chatt";
-            f = new AboutChat();
-        }
-        else if (pos == LOGOUT_IDX)
+        if (pos == EVENTS_IDX) {
+            title = "Events";
+            f = new EventListFragment();
+        } else if (pos == LOGOUT_IDX)
         {
             preferencesManager.clearUser();
             startActivity(new Intent(this, LoginActivity.class));
@@ -225,7 +201,7 @@ public class MainActivity extends CTActivity {
                         setActionBarTitle();
                     }
                 });
-        launchFragment(CHAT_IDX);
+        launchFragment(EVENTS_IDX);
     }
 
     /**
@@ -235,7 +211,7 @@ public class MainActivity extends CTActivity {
     {
         if (drawerLayout.isDrawerOpen(drawerLeft))
         {
-            getSupportActionBar().setTitle(R.string.app_name);
+//            getSupportActionBar().setTitle(R.string.app_name);
             return;
         }
         if (getSupportFragmentManager().getBackStackEntryCount() == 0)

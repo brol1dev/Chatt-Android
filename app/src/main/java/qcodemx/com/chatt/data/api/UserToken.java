@@ -38,4 +38,10 @@ public class UserToken extends CTResponse {
     public void setRegistrationId(String registrationId) {
         this.registrationId = registrationId;
     }
+
+    @Override
+    public String toString() {
+        return "User: {id: " + user.getId() + ", email: " + user.getEmail()
+                + ", token: " + token + "}";
+    }
 }

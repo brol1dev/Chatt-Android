@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/pad_5dp"
-            android:text="@string/to"
+            android:text="@string/invite"
             android:textColor="@color/main_color_green"
             android:textSize="@dimen/txt_14sp" />
 

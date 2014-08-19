@@ -28,7 +28,8 @@ import static retrofit.RestAdapter.LogLevel.FULL;
         library = true
 )
 public final class CTAPIModule {
-    public static final String BASE_URL = "http://107.170.213.39:3000";
+//    public static final String BASE_URL = "http://107.170.213.39:3000";
+    public static final String BASE_URL = "http://10.12.1.244:3000";
 
     @Provides @Singleton Endpoint provideEndpoint() {
         return Endpoints.newFixedEndpoint(BASE_URL);
@@ -53,5 +54,9 @@ public final class CTAPIModule {
 
     @Provides @Singleton UserService provideUserService(RestAdapter restAdapter) {
         return restAdapter.create(UserService.class);
+    }
+
+    @Provides @Singleton EventService provideEventService(RestAdapter restAdapter) {
+        return restAdapter.create(EventService.class);
     }
 }

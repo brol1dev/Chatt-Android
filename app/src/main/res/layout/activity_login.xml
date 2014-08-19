@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/main_color_blue"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_login" />
+            android:src="@drawable/splash_sec" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
                 style="@style/btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_fb" />
+                android:background="@drawable/btn_fbk" />
 
             <Button
                 android:id="@+id/btn_tw"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/pad_10dp"
-                android:background="@drawable/btn_tw" />
+                android:background="@drawable/btn_gp" />
         </LinearLayout>
 
         <TextView
@@ -74,21 +74,21 @@
         </EditText>
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_login"
             style="@style/btn_white_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register" />
+            android:text="@string/log_in" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pad_20dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:padding="@dimen/pad_5dp"
-            android:text="@string/log_in"
-            android:textColor="@color/main_color_green"
+            android:text="@string/register"
+            android:textColor="@color/white"
             android:textSize="@dimen/txt_18sp"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
             android:id="@+id/btn_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:padding="@dimen/pad_5dp"
             android:text="@string/forgot_my_pwd"
             android:textColor="@color/main_color_gray_dk"

@@ -2,6 +2,7 @@ package qcodemx.com.chatt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import static qcodemx.com.chatt.data.api.User.UserCredentials;
 
 
 public class LoginActivity extends CTActivity {
+    private static final String LOG_TAG = "LoginActivity";
 
     @InjectView(R.id.btn_register) Button registerButton;
     @InjectView(R.id.btn_login) Button loginButton;
@@ -62,11 +64,11 @@ public class LoginActivity extends CTActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         CTResponse errorResponse = (CTResponse) error.getBody();
-                        if (null != errorResponse.getMessage()) {
-                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
+                        if (error.isNetworkError()) {
                             Toast.makeText(LoginActivity.this, "Is there network connectivity?", Toast.LENGTH_SHORT)
+                                    .show();
+                        } else if (null != errorResponse && null != errorResponse.getMessage()) {
+                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
                                     .show();
                         }
                     }
@@ -77,27 +79,37 @@ public class LoginActivity extends CTActivity {
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
                 userService.signIn(new UserCredentials(email, password), new Callback<UserToken>() {
                     @Override
-                    public void success(UserToken userToken, Response response) {
-                        // TODO: store user in background
-                        preferencesManager.storeUser(userToken);
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
+                    public void success(final UserToken userToken, Response response) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d(LOG_TAG, "logged user: " + userToken);
+                                if (preferencesManager.storeUser(userToken)) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                            finish();
+                                        }
+                                    });
+                                }
+                            }
+                        }).start();
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         CTResponse errorResponse = (CTResponse) error.getBody();
-                        if (null != errorResponse.getMessage()) {
-                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
+                        if (error.isNetworkError()) {
                             Toast.makeText(LoginActivity.this, "Is there network connectivity?", Toast.LENGTH_SHORT)
+                                    .show();
+                        } else if (null != errorResponse && null != errorResponse.getMessage()) {
+                            Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT)
                                     .show();
                         }
                     }

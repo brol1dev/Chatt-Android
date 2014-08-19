@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -67,6 +68,7 @@ public final class CTDataModule {
             File cacheDir = new File(application.getCacheDir(), CACHE_FILE);
             Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
             client.setCache(cache);
+            client.setConnectTimeout(1, TimeUnit.SECONDS);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Unable to install disk cache.");
         }
