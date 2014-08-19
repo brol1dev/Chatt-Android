@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -62,6 +63,15 @@ public class EventListFragment extends CTFragment {
 
         adapter = new EventAdapter(getActivity());
         eventsList.setAdapter(adapter);
+        eventsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Event event = adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), EventChatActivity.class);
+                intent.putExtra(EventChatActivity.EXTRA_EVENT, event);
+                startActivity(intent);
+            }
+        });
 
         privateButton.setOnClickListener(new OnClickListener() {
             @Override

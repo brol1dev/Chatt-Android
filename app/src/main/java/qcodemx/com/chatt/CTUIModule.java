@@ -15,7 +15,8 @@ import dagger.Provides;
                 LoginActivity.class,
                 MainActivity.class,
                 EventListFragment.class,
-                NewEventActivity.class
+                NewEventActivity.class,
+                EventChatActivity.class
         },
         library = true,
         complete = false

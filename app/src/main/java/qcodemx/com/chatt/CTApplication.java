@@ -28,4 +28,8 @@ public class CTApplication extends Application {
     public ObjectGraph getApplicationGraph() {
         return applicationGraph;
     }
+
+    public <T> void inject(T instance) {
+        applicationGraph.inject(instance);
+    }
 }

@@ -1,5 +1,6 @@
 package qcodemx.com.chatt.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import qcodemx.com.chatt.data.api.CTResponse;
@@ -10,7 +11,8 @@ import qcodemx.com.chatt.data.api.CTResponse;
  * Data structure for an event.
  */
 public class Event extends CTResponse {
-    private int id;
+
+    private String _id;
     private String title;
     private EventUser author;
     private String date;
@@ -26,17 +28,24 @@ public class Event extends CTResponse {
         this.pub = pub;
     }
 
-    public Event(String title, EventUser author, String date, boolean pub, List<EventUser> users) {
-        this(title, author, date, pub);
+    public Event(boolean success, String message, String _id, String title, EventUser author,
+                 String date, boolean pub, List<EventUser> users, List<ChatMessage> chat) {
+        super(success, message);
+        this._id = _id;
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.pub = pub;
         this.users = users;
+        this.chat = chat;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String _id) {
+        this._id = _id;
     }
 
     public String getTitle() {
@@ -77,5 +86,18 @@ public class Event extends CTResponse {
 
     public List<ChatMessage> getChat() {
         return chat;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "_id='" + _id + '\'' +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                ", date='" + date + '\'' +
+                ", pub=" + pub +
+                ", users=" + users +
+                ", chat=" + chat +
+                '}';
     }
 }

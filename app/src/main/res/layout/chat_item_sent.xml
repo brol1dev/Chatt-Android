@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<qcodemx.com.chatt.ui.ChatItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llaa"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -37,28 +37,28 @@
             >
 
             <TextView
-                android:id="@+id/lbl1"
+                android:id="@+id/text_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/date"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txt_13sp" />
             <TextView
-                android:id="@+id/lbl2"
+                android:id="@+id/text_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sd"
+                android:text="@string/message"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txt_14sp" 
-                android:maxLines="4"/>
+                android:maxLines="3"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/lbl3"
+            android:id="@+id/text_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="textvdv"
+            android:text="@string/author"
             android:textColor="@color/main_color_gray"
             android:textSize="@dimen/txt_14sp"
             android:layout_alignRight="@+id/v1"
@@ -67,4 +67,4 @@
             />
         
     </RelativeLayout>
-</LinearLayout>
+</qcodemx.com.chatt.ui.ChatItemView>

@@ -15,7 +15,9 @@ import qcodemx.com.chatt.data.CTDataModule;
  */
 
 @Module(
-        injects = CTApplication.class,
+        injects = {
+                CTApplication.class
+        },
         includes = CTDataModule.class,
         library = true
 )

@@ -43,7 +43,7 @@ public class GroupChat extends CustomFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		View v = inflater.inflate(R.layout.group_chat, null);
+		View v = inflater.inflate(R.layout.event_chat, null);
 
 		loadConversationList();
 		ListView list = (ListView) v.findViewById(R.id.list);
@@ -52,14 +52,14 @@ public class GroupChat extends CustomFragment
 		list.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
 		list.setStackFromBottom(true);
 
-		txt = (EditText) v.findViewById(R.id.txt);
+//		txt = (EditText) v.findViewById(R.id.txt);
 		txt.setInputType(InputType.TYPE_CLASS_TEXT
 				| InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
 		setTouchNClick(v.findViewById(R.id.btnAdd));
-		setTouchNClick(v.findViewById(R.id.btnEdit));
-		setTouchNClick(v.findViewById(R.id.btnCamera));
-		setTouchNClick(v.findViewById(R.id.btnSend));
+//		setTouchNClick(v.findViewById(R.id.btnEdit));
+//		setTouchNClick(v.findViewById(R.id.btnCamera));
+//		setTouchNClick(v.findViewById(R.id.btnSend));
 		return v;
 	}
 
@@ -70,10 +70,10 @@ public class GroupChat extends CustomFragment
 	public void onClick(View v)
 	{
 		super.onClick(v);
-		if (v.getId() == R.id.btnSend)
-		{
-			sendMessage();
-		}
+//		if (v.getId() == R.id.btnSend)
+//		{
+//			sendMessage();
+//		}
 
 	}
 

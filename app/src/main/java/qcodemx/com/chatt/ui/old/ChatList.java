@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,7 +35,7 @@ public class ChatList extends CustomFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		View v = inflater.inflate(R.layout.chat_list, null);
+		View v = inflater.inflate(R.layout.event_list, null);
 
 		loadChatList();
 		ListView list = (ListView) v.findViewById(R.id.list);
@@ -161,7 +160,7 @@ public class ChatList extends CustomFragment
 		{
 			if (v == null)
 				v = LayoutInflater.from(getActivity()).inflate(
-						R.layout.chat_item, null);
+						R.layout.event_item, null);
 
 			ChatItem c = getItem(pos);
 			TextView lbl = (TextView) v.findViewById(R.id.lbl1);
@@ -176,15 +175,15 @@ public class ChatList extends CustomFragment
 			lbl = (TextView) v.findViewById(R.id.lbl4);
 			lbl.setText(c.getMsg());
 
-			ImageView img = (ImageView) v.findViewById(R.id.img1);
-			img.setImageResource(c.getIcon());
+//			ImageView img = (ImageView) v.findViewById(R.id.img1);
+//			img.setImageResource(c.getIcon());
+//
+//			img = (ImageView) v.findViewById(R.id.img2);
+//			img.setImageResource(c.isGroup() ? R.drawable.ic_group
+//					: R.drawable.ic_lock);
 
-			img = (ImageView) v.findViewById(R.id.img2);
-			img.setImageResource(c.isGroup() ? R.drawable.ic_group
-					: R.drawable.ic_lock);
-
-			img = (ImageView) v.findViewById(R.id.online);
-			img.setVisibility(c.isOnline() ? View.VISIBLE : View.INVISIBLE);
+//			img = (ImageView) v.findViewById(R.id.online);
+//			img.setVisibility(c.isOnline() ? View.VISIBLE : View.INVISIBLE);
 			return v;
 		}
 

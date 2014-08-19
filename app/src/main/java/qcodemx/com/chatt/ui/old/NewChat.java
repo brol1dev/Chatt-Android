@@ -22,12 +22,12 @@ public class NewChat extends CustomActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.new_chat);
+		setContentView(R.layout.new_event);
 
 		setTouchNClick(R.id.btnAdd);
-		setTouchNClick(R.id.btnProject);
-		setTouchNClick(R.id.btnCamera);
-		setTouchNClick(R.id.btnSend);
+//		setTouchNClick(R.id.btnProject);
+//		setTouchNClick(R.id.btnCamera);
+//		setTouchNClick(R.id.btnSend);
 
 		getSupportActionBar().setLogo(R.drawable.icon_trans);
 	}
@@ -39,10 +39,10 @@ public class NewChat extends CustomActivity
 	public void onClick(View v)
 	{
 		super.onClick(v);
-		if (v.getId() == R.id.btnSend)
-		{
-			finish();
-		}
+//		if (v.getId() == R.id.btnSend)
+//		{
+//			finish();
+//		}
 	}
 
 	/* (non-Javadoc)
