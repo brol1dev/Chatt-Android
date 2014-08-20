@@ -117,6 +117,7 @@ public class EventChatActivity extends CTActivity {
             public void success(Chat chat, Response response) {
                 Log.d(LOG_TAG, "chat msgs: " + chat.getChat().size());
                 adapter.update(chat.getChat());
+                chatListView.setSelection(adapter.getCount() - 1);
             }
 
             @Override
@@ -130,12 +131,14 @@ public class EventChatActivity extends CTActivity {
 
         private boolean run = true;
 
+        private static final int POLL_TIME = 3 * 1000;
+
         @Override
         public void run() {
             while (run) {
                 loadChat();
                 try {
-                    sleep(10 * 1000);
+                    sleep(POLL_TIME);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

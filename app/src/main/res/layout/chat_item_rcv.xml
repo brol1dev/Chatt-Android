@@ -32,8 +32,7 @@
             android:paddingRight="@dimen/pad_15dp"
             android:paddingTop="@dimen/pad_5dp"
             android:paddingBottom="@dimen/pad_5dp"
-            android:layout_alignBottom="@+id/img"
-            >
+            android:layout_alignBottom="@+id/img">
 
             <TextView
                 android:id="@+id/text_date"
