@@ -22,7 +22,7 @@ import static com.loopj.android.http.RequestParams.APPLICATION_JSON;
 @Singleton
 public class CTRestClient {
 
-    private static final String BASE_URL = "http://192.168.1.68:3000";
+    private static final String BASE_URL = "http://104.131.148.97:3000";
 
     private final AsyncHttpClient client;
 

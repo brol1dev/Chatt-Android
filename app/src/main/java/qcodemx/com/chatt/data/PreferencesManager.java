@@ -32,8 +32,8 @@ public class PreferencesManager {
 
         editor.putString(USER_EMAIL, userToken.getUser().getEmail())
                 .putString(USER_TOKEN, userToken.getToken())
-                .putString(USER_ID, userToken.getUser().getId());
-//                .putString(REGISTRATION_ID, userToken.getRegistrationId());
+                .putString(USER_ID, userToken.getUser().getId())
+                .putString(DEVICE_ID, userToken.getDeviceId());
 
         return editor.commit();
     }
@@ -44,7 +44,7 @@ public class PreferencesManager {
         String token = preferences.getString(USER_TOKEN, "");
         String deviceId = preferences.getString(DEVICE_ID, "");
 
-        if (email.isEmpty() || token.isEmpty() || userId.isEmpty())
+        if (email.isEmpty() || token.isEmpty() || userId.isEmpty() || deviceId.isEmpty())
             return null;
 
         User user = new User(userId, email);

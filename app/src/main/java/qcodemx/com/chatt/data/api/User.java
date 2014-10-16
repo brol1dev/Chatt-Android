@@ -9,6 +9,7 @@ public class User {
     protected String id;
     protected String name;
     protected String email;
+    protected String imageUrl;
     protected Long iat;              // issued at
     protected Long exp;              // expiration
 
@@ -21,19 +22,11 @@ public class User {
         this.email = email;
     }
 
-    public User(String id, String name, String email, Long iat, Long exp) {
+    public User(String id, String name, String email, String imageUrl) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.iat = iat;
-        this.exp = exp;
-    }
-
-    public User(String id, String email, Long iat, Long exp) {
-        this.id = id;
-        this.email = email;
-        this.iat = iat;
-        this.exp = exp;
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {
@@ -54,6 +47,10 @@ public class User {
 
     public Long getExp() {
         return exp;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public static class UserCredentials {

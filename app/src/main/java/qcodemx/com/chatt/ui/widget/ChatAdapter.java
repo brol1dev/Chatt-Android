@@ -52,7 +52,7 @@ public class ChatAdapter extends BindableAdapter<ChatMessage> {
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
         ChatMessage message = getItem(position);
-        if ( message.getUser().equals(user.getEmail()) ) {
+        if ( message.getUser().equals(user.getEmail())) {
             return inflater.inflate(R.layout.chat_item_sent, container, false);
         }
 

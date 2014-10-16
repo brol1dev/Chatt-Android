@@ -24,6 +24,7 @@ public class LoginActivity extends CTActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
 
+        preferencesManager.clearUser();
         if (null != preferencesManager.retrieveCurrentUser()) {
             startActivity(new Intent(this, MainActivity.class));
             finish();

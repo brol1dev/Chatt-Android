@@ -95,7 +95,7 @@ public class SocialFragment extends CTFragment implements OnInitializationComple
                     ((SignupFragment) this).register(socialPerson.name, socialPerson.email,
                             null, socialPerson.avatarURL, PROVIDER_FB_ID);
                 } else if (this instanceof LoginFragment) {
-
+                    ((LoginFragment) this).login(socialPerson.email, null, PROVIDER_FB_ID);
                 }
                 break;
         }
