@@ -2,6 +2,7 @@ package qcodemx.com.chatt.data.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -30,6 +31,10 @@ import static retrofit.RestAdapter.LogLevel.FULL;
 public final class CTAPIModule {
     public static final String BASE_URL = "http://107.170.213.39:3000";
 //    public static final String BASE_URL = "http://192.168.1.69:3000";
+
+    @Provides @Singleton AsyncHttpClient provideAsyncHttpClient() {
+        return new AsyncHttpClient();
+    }
 
     @Provides @Singleton Endpoint provideEndpoint() {
         return Endpoints.newFixedEndpoint(BASE_URL);

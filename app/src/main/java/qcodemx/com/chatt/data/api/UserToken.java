@@ -7,13 +7,13 @@ package qcodemx.com.chatt.data.api;
  */
 public class UserToken extends CTResponse {
     protected String token;
-    protected String registrationId; // Registration id for GCM
+    protected String deviceId; // Registration id for GCM
     protected User user;
 
-    public UserToken(String token, String registrationId, User user) {
+    public UserToken(String token, String deviceId, User user) {
         super(true, null);
         this.token = token;
-        this.registrationId = registrationId;
+        this.deviceId = deviceId;
         this.user = user;
     }
 
@@ -31,12 +31,12 @@ public class UserToken extends CTResponse {
         return user;
     }
 
-    public String getRegistrationId() {
-        return registrationId;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setRegistrationId(String registrationId) {
-        this.registrationId = registrationId;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class PreferencesManager {
     private static final String USER_ID = "user_id";
     private static final String USER_EMAIL = "email";
     private static final String USER_TOKEN = "token";
-    private static final String REGISTRATION_ID = "reg_id";
+    private static final String DEVICE_ID = "device_id";
 
     private final SharedPreferences preferences;
 
@@ -42,13 +42,13 @@ public class PreferencesManager {
         String userId = preferences.getString(USER_ID, "");
         String email = preferences.getString(USER_EMAIL, "");
         String token = preferences.getString(USER_TOKEN, "");
-        String regId = preferences.getString(REGISTRATION_ID, "");
+        String deviceId = preferences.getString(DEVICE_ID, "");
 
         if (email.isEmpty() || token.isEmpty() || userId.isEmpty())
             return null;
 
         User user = new User(userId, email);
-        return new UserToken(token, regId, user);
+        return new UserToken(token, deviceId, user);
     }
 
     public boolean clearUser() {
