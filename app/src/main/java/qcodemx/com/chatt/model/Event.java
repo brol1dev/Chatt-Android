@@ -1,6 +1,7 @@
 package qcodemx.com.chatt.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import qcodemx.com.chatt.data.api.CTResponse;
@@ -10,9 +11,10 @@ import qcodemx.com.chatt.data.api.CTResponse;
  *
  * Data structure for an event.
  */
-public class Event extends CTResponse {
+public class Event implements Serializable {
+    private static final long serialVersionUID = 0L;
 
-    private String _id;
+    private String id;
     private String title;
     private EventUser author;
     private String date;
@@ -20,32 +22,22 @@ public class Event extends CTResponse {
     private List<EventUser> users;
     private List<ChatMessage> chat;
 
-    public Event(String title, EventUser author, String date, boolean pub) {
-        super(true, null);
+    public Event(String id, String title, EventUser author, String date, boolean pub) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.date = date;
         this.pub = pub;
-    }
-
-    public Event(boolean success, String message, String _id, String title, EventUser author,
-                 String date, boolean pub, List<EventUser> users, List<ChatMessage> chat) {
-        super(success, message);
-        this._id = _id;
-        this.title = title;
-        this.author = author;
-        this.date = date;
-        this.pub = pub;
-        this.users = users;
-        this.chat = chat;
+        this.users = new ArrayList<>();
+        this.chat = new ArrayList<>();
     }
 
     public String getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -72,11 +64,11 @@ public class Event extends CTResponse {
         this.author = author;
     }
 
-    public boolean isPub() {
+    public boolean isPublic() {
         return pub;
     }
 
-    public void setPub(boolean pub) {
+    public void setPublic(boolean pub) {
         this.pub = pub;
     }
 
@@ -84,14 +76,22 @@ public class Event extends CTResponse {
         return users;
     }
 
+    public void setUsers(List<EventUser> users) {
+        this.users = users;
+    }
+
     public List<ChatMessage> getChat() {
         return chat;
+    }
+
+    public void setChat(List<ChatMessage> chat) {
+        this.chat = chat;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "_id='" + _id + '\'' +
+                "_id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", author=" + author +
                 ", date='" + date + '\'' +

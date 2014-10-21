@@ -29,8 +29,9 @@ import static retrofit.RestAdapter.LogLevel.FULL;
         library = true
 )
 public final class CTAPIModule {
-    public static final String BASE_URL = "http://104.131.148.97:3000";
-//    public static final String BASE_URL = "http://192.168.1.69:3000";
+//    public static final String BASE_URL = "http://104.131.148.97:3000"; // Cloud
+//    public static final String BASE_URL = "http://192.168.1.68:3000"; // Home
+    private static final String BASE_URL = "http://10.12.1.221:3000";      // Work
 
     @Provides @Singleton AsyncHttpClient provideAsyncHttpClient() {
         return new AsyncHttpClient();

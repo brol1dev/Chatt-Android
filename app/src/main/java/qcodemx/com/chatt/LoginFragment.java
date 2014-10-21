@@ -30,8 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import qcodemx.com.chatt.data.PreferencesManager;
 import qcodemx.com.chatt.data.api.CTRestClient;
-import qcodemx.com.chatt.data.api.User;
-import qcodemx.com.chatt.data.api.UserToken;
+import qcodemx.com.chatt.model.User;
 import qcodemx.com.chatt.ui.util.UIUtils;
 
 
@@ -53,7 +52,6 @@ public class LoginFragment extends SocialFragment {
     @InjectView(R.id.edit_password) EditText passwordEditText;
 
     @Inject CTRestClient ctRestClient;
-
     @Inject PreferencesManager preferencesManager;
 
     private GoogleCloudMessaging gcm;
@@ -186,9 +184,8 @@ public class LoginFragment extends SocialFragment {
                                     String deviceId = response.getString("device_id");
                                     String token = response.getString("token");
 
-                                    User user = new User(userId, username, email, imageUrl);
-                                    UserToken userToken = new UserToken(token, deviceId, user);
-                                    if (preferencesManager.storeUser(userToken)) {
+                                    User user = new User(userId, deviceId, username, email, imageUrl, token);
+                                    if (preferencesManager.storeUser(user)) {
                                         getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {

@@ -1,5 +1,6 @@
 package qcodemx.com.chatt.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import qcodemx.com.chatt.data.api.CTResponse;
@@ -9,22 +10,32 @@ import qcodemx.com.chatt.data.api.CTResponse;
  *
  * Stores the public and private events.
  */
-public class EventManager extends CTResponse {
+public class EventManager {
 
-    private List<Event> pub;
-    private List<Event> priv;
+    private List<Event> publicEvents = Collections.emptyList();
+    private List<Event> privateEvents = Collections.emptyList();
 
-    public EventManager(boolean success, String message, List<Event> pub, List<Event> priv) {
-        super(success, message);
-        this.pub = pub;
-        this.priv = priv;
+    public EventManager() {
     }
 
-    public List<Event> getPub() {
-        return pub;
+    public EventManager(List<Event> publicEvents, List<Event> privateEvents) {
+        this.publicEvents = publicEvents;
+        this.privateEvents = privateEvents;
     }
 
-    public List<Event> getPriv() {
-        return priv;
+    public List<Event> getPublicEvents() {
+        return publicEvents;
+    }
+
+    public void setPublicEvents(List<Event> publicEvents) {
+        this.publicEvents = publicEvents;
+    }
+
+    public List<Event> getPrivateEvents() {
+        return privateEvents;
+    }
+
+    public void setPrivateEvents(List<Event> privateEvents) {
+        this.privateEvents = privateEvents;
     }
 }

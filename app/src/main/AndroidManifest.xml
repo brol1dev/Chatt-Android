@@ -42,6 +42,15 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewEventActivity" />
         <activity android:name=".EventChatActivity" />
+
+        <!--<receiver android:name=".EventChatActivity$ChatBroadcastReceiver"-->
+                  <!--android:permission="com.google.android.c2dm.permission.SEND" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+
+                <!--<category android:name="qcodemx.com.chatt" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>

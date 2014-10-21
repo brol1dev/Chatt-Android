@@ -64,6 +64,7 @@
             android:layout_alignRight="@+id/v1"
             android:layout_below="@+id/v1"
             android:layout_marginTop="@dimen/pad_5dp"
+            android:visibility="invisible"
             />
         
     </RelativeLayout>

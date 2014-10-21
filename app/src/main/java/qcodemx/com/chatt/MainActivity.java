@@ -9,15 +9,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -25,8 +32,9 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import qcodemx.com.chatt.data.PreferencesManager;
-import qcodemx.com.chatt.data.api.UserToken;
+import qcodemx.com.chatt.data.api.CTRestClient;
 import qcodemx.com.chatt.model.DrawerItem;
+import qcodemx.com.chatt.model.User;
 import qcodemx.com.chatt.ui.widget.LeftNavAdapter;
 
 /**
@@ -46,7 +54,10 @@ public class MainActivity extends CTActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     @Inject PreferencesManager preferencesManager;
-    UserToken userToken;
+    @Inject Picasso picasso;
+    @Inject CTRestClient restClient;
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +65,7 @@ public class MainActivity extends CTActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        userToken = preferencesManager.retrieveCurrentUser();
-        Log.d(LOG_TAG, "current user: " + userToken);
+        user = preferencesManager.retrieveCurrentUser();
 
         setupActionBar();
         setupContainer();
@@ -118,9 +128,15 @@ public class MainActivity extends CTActivity {
 
         View header = getLayoutInflater().inflate(R.layout.left_nav_header,
                 null);
-        TextView emailTextView = (TextView) header.findViewById(R.id.text_mail);
-        Log.d(LOG_TAG, "email: " + userToken.getUser().getEmail());
-        emailTextView.setText(userToken.getUser().getEmail());
+        TextView emailTextView = (TextView) header.findViewById(R.id.text_email);
+        TextView usernameTextView = (TextView) header.findViewById(R.id.text_username);
+        ImageView userImageView = (ImageView) header.findViewById(R.id.image_user);
+
+        emailTextView.setText(user.getEmail());
+        usernameTextView.setText(user.getName());
+        if (null != user.getImageUrl() && !user.getImageUrl().isEmpty())
+            picasso.load(user.getImageUrl()).into(userImageView);
+
         drawerLeft.addHeaderView(header);
 
         drawerLeft.setAdapter(new LeftNavAdapter(this, getDummyLeftNavItems()));
@@ -168,6 +184,17 @@ public class MainActivity extends CTActivity {
             f = new EventListFragment();
         } else if (pos == LOGOUT_IDX)
         {
+//            try {
+//                JSONObject params = new JSONObject();
+//                params.put("email", user.getEmail());
+//                params.put("device_id", user.getDeviceId());
+//                restClient.post("/logout", params, new JsonHttpResponseHandler() {
+//
+//                });
+//            } catch (JSONException | UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+
             preferencesManager.clearUser();
             startActivity(new Intent(this, LoginActivity.class));
             finish();

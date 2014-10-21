@@ -34,6 +34,6 @@ public class ChatItemView extends LinearLayout {
     public void bindTo(ChatMessage chatMessage) {
         dateTextView.setText(chatMessage.getDate());
         messageTextView.setText(chatMessage.getMessage());
-        authorTextView.setText(chatMessage.getUser());
+//        authorTextView.setText(chatMessage.getUser());
     }
 }

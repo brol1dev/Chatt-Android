@@ -13,4 +13,9 @@
     <color name="main_color_gray">#7d7d7d</color>
     <color name="gray_light">#e8e8e8</color>
 
+    <color name="primary">#5677fc</color>
+    <color name="primary_low">#d0d9ff</color>
+    <color name="primary_high">#455ede</color>
+    <color name="accent">#ffff00</color>
+
 </resources>

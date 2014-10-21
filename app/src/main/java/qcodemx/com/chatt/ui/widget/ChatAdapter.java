@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 import qcodemx.com.chatt.R;
-import qcodemx.com.chatt.data.api.User;
 import qcodemx.com.chatt.model.ChatMessage;
+import qcodemx.com.chatt.model.User;
 import qcodemx.com.chatt.ui.ChatItemView;
 
 /**
@@ -52,7 +52,7 @@ public class ChatAdapter extends BindableAdapter<ChatMessage> {
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
         ChatMessage message = getItem(position);
-        if ( message.getUser().equals(user.getEmail())) {
+        if ( message.getUserId().equals(user.getId())) {
             return inflater.inflate(R.layout.chat_item_sent, container, false);
         }
 

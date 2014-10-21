@@ -10,18 +10,23 @@ import java.io.Serializable;
 public class ChatMessage implements Serializable {
     private static final long serialVersionUID = 0L;
 
-    private String user;
+    private String userId;
     private String message;
     private String date;
 
-    public ChatMessage(String user, String message, String date) {
-        this.user = user;
+    public ChatMessage(String userId, String message) {
+        this.userId = userId;
+        this.message = message;
+    }
+
+    public ChatMessage(String userId, String message, String date) {
+        this.userId = userId;
         this.message = message;
         this.date = date;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
     public String getMessage() {
@@ -35,7 +40,7 @@ public class ChatMessage implements Serializable {
     @Override
     public String toString() {
         return "ChatMessage{" +
-                "user='" + user + '\'' +
+                "userId='" + userId + '\'' +
                 ", message='" + message + '\'' +
                 ", date='" + date + '\'' +
                 '}';

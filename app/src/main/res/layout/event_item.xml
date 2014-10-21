@@ -30,18 +30,18 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Title"
                 android:textSize="@dimen/txt_15sp"
-                android:textColor="@color/main_color_green"
+                android:textColor="@color/black"
                 android:lines="1"
                 android:ellipsize="end" />
             <TextView
                 android:id="@+id/event_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Date"
                 android:textSize="@dimen/txt_12sp"
-                android:textColor="@color/main_color_green" />
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <!--<TextView-->
